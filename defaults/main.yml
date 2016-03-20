@@ -24,6 +24,8 @@ lxctemplate_builds:   /var/lib/vz/template/builds
 lxctemplate_storage:  /var/lib/vz/template/cache
 lxctemplate_dir:      "{{ lxctemplate_distro }}-{{ lxctemplate_dab.name }}-{{ lxctemplate_dab.architecture }}"
 
+lxctemplate_public_keys: []
+
 ## variables for container creation
 lxctemplate_container: false
 

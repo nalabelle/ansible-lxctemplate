@@ -21,11 +21,19 @@
   args:
     chdir: "{{ lxctemplate_builds }}/{{ lxctemplate_dir }}"
 
+- name: SSHD Copy authorized keys
+  authorized_key: 
+    user: root
+    key: "{{ item }}"
+    path: "{{ lxctemplate_builds }}/{{ lxctemplate_dir }}/rootfs/root/.ssh/authorized_keys"
+    manage_dir: no
+  with_file: "{{ lxctemplate_public_keys }}"
+
 - name: SSHD Permit Root Login
   lineinfile: 
     dest: "{{ lxctemplate_builds }}/{{ lxctemplate_dir }}/rootfs/etc/ssh/sshd_config"
     regexp: "^PermitRootLogin"
-    line: "PermitRootLogin yes"
+    line: "PermitRootLogin without-password"
 
 - name: DAB finalize the template
   shell: dab finalize
@@ -36,7 +44,7 @@
   shell: mv -v {{ lxctemplate_distro }}-{{ lxctemplate_dab.name }}_{{ lxctemplate_dab.version }}_{{ lxctemplate_dab.architecture }}.tar.gz {{ lxctemplate_storage }}/
   args:
     chdir: "{{ lxctemplate_builds }}/{{ lxctemplate_dir }}"
-    creates: "{{ lxctemplate_storage }}/{{ lxctemplate_distro }}-{{ lxctemplate_dab.name }}_{{ lxctemplate_dab.version }}_{{ lxctemplate_dab.architecture }}.tar.gz"
+#    creates: "{{ lxctemplate_storage }}/{{ lxctemplate_distro }}-{{ lxctemplate_dab.name }}_{{ lxctemplate_dab.version }}_{{ lxctemplate_dab.architecture }}.tar.gz"
 
 - name: DAB cleanup build files, keep cached packages
   shell: dab clean
