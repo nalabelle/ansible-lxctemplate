@@ -1,6 +1,16 @@
 ---
 # tasks file for chriswayg.lxctemplate
 
+- name: Remove Enterprise Repo
+  apt_repository:
+    repo: 'deb https://enterprise.proxmox.com/debian jessie pve-enterprise'
+    state: absent
+
+- name: Add Community Repo
+  apt_repository:
+    repo: 'deb http://download.proxmox.com/debian jessie pve-no-subscription'
+    state: present
+
 - name: Include maketemplate.yml
   include: maketemplate.yml
   when: lxctemplate_make
