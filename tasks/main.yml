@@ -3,12 +3,12 @@
 
 - name: Remove Enterprise Repo
   apt_repository:
-    repo: 'deb https://enterprise.proxmox.com/debian jessie pve-enterprise'
+    repo: 'deb https://enterprise.proxmox.com/debian stretch pve-enterprise'
     state: absent
 
 - name: Add Community Repo
   apt_repository:
-    repo: 'deb http://download.proxmox.com/debian jessie pve-no-subscription'
+    repo: 'deb http://download.proxmox.com/debian stretch pve-no-subscription'
     state: present
 
 - name: Include maketemplate.yml
