@@ -20,6 +20,6 @@
   register: conf
 
 - name: Include lnitialize_template.yml
-  include: initialize_template.yml
+  include_tasks: initialize_template.yml
   when: build_dir.changed or conf.changed
 
