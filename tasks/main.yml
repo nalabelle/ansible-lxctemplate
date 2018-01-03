@@ -12,9 +12,9 @@
     state: present
 
 - name: Include maketemplate.yml
-  include: maketemplate.yml
+  include_tasks: maketemplate.yml
   when: lxctemplate_make
 
 - name: Include container.yml
-  include: container.yml
+  include_tasks: container.yml
   when: lxctemplate_container
